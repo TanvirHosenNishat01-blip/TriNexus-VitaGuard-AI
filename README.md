@@ -41,25 +41,31 @@ Double-click [`start-local.bat`](start-local.bat) from the root folder. It autom
 <details open>
 <summary><b>1️⃣ Start the FastAPI Backend (Terminal 1)</b></summary>
 
-Create a virtual environment from the project root:
+Use Python 3.14. Python 3.15 cannot install `numba` from `requirements.txt`. Git Bash on this computer may point `python` at 3.15, so create the environment with `py -3.14`.
+
+Create the virtual environment only when `backend/venv` does not exist yet, and only from the project root. If your prompt already ends in `backend`, do not run `python -m venv backend/venv`. That creates a second folder at `backend/backend/venv`.
 
 ```bash
-python -m venv backend/venv
+py -3.14 -m venv backend/venv
 ```
 
-**Windows:**
+**Windows, including Git Bash.** The executable is `Scripts/python.exe`, not `bin/python`. From the project root:
+
 ```bash
-backend\venv\Scripts\python.exe -m pip install -r backend/requirements.txt
-backend\venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+cd backend
+./venv/Scripts/python.exe -m pip install -r requirements.txt
+./venv/Scripts/python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-**macOS or Linux:**
+**macOS or Linux**, from the project root:
+
 ```bash
-backend/venv/bin/python -m pip install -r backend/requirements.txt
-backend/venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+cd backend
+./venv/bin/python -m pip install -r requirements.txt
+./venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-*(Run that command from `backend/`, or run it from the project root with the module path above. Do not reuse a Windows virtual environment on macOS or Linux.)*
+The API command must run inside `backend`, because the Python package is `app`. Do not reuse a Windows virtual environment on macOS or Linux.
 </details>
 
 <details open>
